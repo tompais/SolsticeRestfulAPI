@@ -1,3 +1,7 @@
-/SolsticeRestfulAPI/.idea
-/SolsticeRestfulAPI/target
-/SolsticeRestfulAPI/out
+/build/
+/target/
+/.idea
+/.settings
+/.classpath
+/.project
+/out
