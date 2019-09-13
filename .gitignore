@@ -1,7 +1,5 @@
-/build/
-/target/
-/.idea
 /.settings
+/target
 /.classpath
 /.project
-/out
+/.idea

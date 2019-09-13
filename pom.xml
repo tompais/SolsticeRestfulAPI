@@ -6,6 +6,7 @@
   <packaging>war</packaging>
   <build>
     <sourceDirectory>src</sourceDirectory>
+    <testSourceDirectory>tests</testSourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -24,19 +25,19 @@
     </plugins>
   </build>
   <dependencies>
-  <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
-<dependency>
-    <groupId>javax</groupId>
-    <artifactId>javaee-api</artifactId>
-    <version>8.0.1</version>
-    <scope>provided</scope>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.wildfly.core/wildfly-server -->
-<dependency>
-    <groupId>org.wildfly.core</groupId>
-    <artifactId>wildfly-server</artifactId>
-    <version>9.0.2.Final</version>
-</dependency>
+    <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
+    <dependency>
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+      <version>8.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.wildfly.core/wildfly-server -->
+    <dependency>
+      <groupId>org.wildfly.core</groupId>
+      <artifactId>wildfly-server</artifactId>
+      <version>9.0.2.Final</version>
+    </dependency>
 
   </dependencies>
 </project>
