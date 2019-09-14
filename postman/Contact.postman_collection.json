@@ -55,7 +55,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/SolsticeRestfulAPI-0.0.1-SNAPSHOT/api/contact?email=leandro.r.pais.98@gmail.com",
+					"raw": "http://localhost:8080/SolsticeRestfulAPI-0.0.1-SNAPSHOT/api/contact?email=test@gmail.com",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -69,7 +69,7 @@
 					"query": [
 						{
 							"key": "email",
-							"value": "leandro.r.pais.98@gmail.com"
+							"value": "test@gmail.com"
 						},
 						{
 							"key": "workNumber",
