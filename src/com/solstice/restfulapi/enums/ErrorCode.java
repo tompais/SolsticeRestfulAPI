@@ -12,7 +12,7 @@ public enum ErrorCode {
         this.codeNumber = codeNumber;
     }
 
-    ErrorCode(){
+    ErrorCode() {
     }
 
     public int getCodeNumber() {

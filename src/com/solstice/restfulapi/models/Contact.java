@@ -1,5 +1,6 @@
 package com.solstice.restfulapi.models;
 
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.QueryParam;
 import java.awt.image.BufferedImage;
 import java.sql.Date;
@@ -20,13 +21,13 @@ public class Contact extends BaseModel {
     private Long workNumber;
     @QueryParam("personalNumber")
     private Long personalNumber;
+    @BeanParam
     private Address address;
 
     public Contact() {
     }
 
-    public Contact(Long id, String name, String company, BufferedImage profileImage, String email, Date birthday, Long workNumber, Long personalNumber, Address address) {
-        this.id = id;
+    public Contact(String name, String company, BufferedImage profileImage, String email, Date birthday, Long workNumber, Long personalNumber, Address address) {
         this.name = name;
         this.company = company;
         this.profileImage = profileImage;

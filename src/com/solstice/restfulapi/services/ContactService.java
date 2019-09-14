@@ -23,7 +23,7 @@ public class ContactService {
 
     private static List<Contact> filterList(List<Contact> contacts, Contact contact) {
         var filteredList = new ArrayList<>(contacts);
-        if(contact != null) {
+        if (contact != null) {
 
             var filterEmail = contact.getEmail();
             var filterPersonalNumber = contact.getPersonalNumber();
@@ -32,24 +32,24 @@ public class ContactService {
             var filterCity = address != null ? address.getCity() : null;
             var filterState = address != null ? address.getState() : null;
 
-            if(validateEmail(filterEmail)) {
-                filteredList = (ArrayList<Contact>) filteredList.stream().filter(c -> c.getEmail().equals(filterEmail)).collect(Collectors.toList());
+            if (validateEmail(filterEmail)) {
+                filteredList = (ArrayList<Contact>) filteredList.stream().filter(c -> c.getEmail().trim().toLowerCase().equals(filterEmail.trim().toLowerCase())).collect(Collectors.toList());
             }
 
-            if(validateNumber(filterPersonalNumber)) {
+            if (validateNumber(filterPersonalNumber)) {
                 filteredList = (ArrayList<Contact>) filteredList.stream().filter(c -> c.getPersonalNumber().equals(filterPersonalNumber)).collect(Collectors.toList());
             }
 
-            if(validateNumber(filterWorkNumber)) {
+            if (validateNumber(filterWorkNumber)) {
                 filteredList = (ArrayList<Contact>) filteredList.stream().filter(c -> c.getWorkNumber().equals(filterWorkNumber)).collect(Collectors.toList());
             }
 
-            if(!HelpfulMethod.IsStringNullOrEmpty(filterCity)) {
-                filteredList = (ArrayList<Contact>) filteredList.stream().filter(c -> c.getAddress().getCity().equals(filterCity)).collect(Collectors.toList());
+            if (!HelpfulMethod.IsStringNullOrEmpty(filterCity)) {
+                filteredList = (ArrayList<Contact>) filteredList.stream().filter(c -> c.getAddress().getCity().trim().toLowerCase().equals(filterCity.trim().toLowerCase())).collect(Collectors.toList());
             }
 
-            if(!HelpfulMethod.IsStringNullOrEmpty(filterState)){
-                filteredList = (ArrayList<Contact>) filteredList.stream().filter(c -> c.getAddress().getState().equals(filterState)).collect(Collectors.toList());
+            if (!HelpfulMethod.IsStringNullOrEmpty(filterState)) {
+                filteredList = (ArrayList<Contact>) filteredList.stream().filter(c -> c.getAddress().getState().trim().toLowerCase().equals(filterState.trim().toLowerCase())).collect(Collectors.toList());
             }
         }
         return filteredList;
@@ -79,16 +79,16 @@ public class ContactService {
         return address != null && address.getBlock() > 0 && !HelpfulMethod.IsStringNullOrEmpty(address.getStreet()) && !HelpfulMethod.IsStringNullOrEmpty(address.getCity()) && !HelpfulMethod.IsStringNullOrEmpty(address.getState());
     }
 
-    public static List<Contact> getAll(Contact contact){
+    public static List<Contact> getAll(Contact contact) {
         return filterList(staticContactList, contact);
     }
 
     public static Contact getById(@NonNull Long id) throws EntityNotFoundException {
         Contact contact = null;
-        if(id != null && id > 0){
+        if (id != null && id > 0) {
             contact = staticContactList.stream().filter(c -> c.getId().equals(id)).findFirst().orElse(null);
-            if(contact == null){
-                throw new EntityNotFoundException("The contact with id " + id + " has not be found", ErrorCode.ENTITYNOTFOUND);
+            if (contact == null) {
+                throw new EntityNotFoundException("The contact with id " + id + " has not been found", ErrorCode.ENTITYNOTFOUND);
             }
         }
         return contact;
@@ -99,12 +99,12 @@ public class ContactService {
     }
 
     private static boolean didContactExist(Contact contact) {
-        return staticContactList.stream().anyMatch(c -> c.getEmail().equals(contact.getEmail()));
+        return staticContactList.stream().anyMatch(c -> c.getEmail().trim().toLowerCase().equals(contact.getEmail().trim().toLowerCase()));
     }
 
     public static void create(@NonNull Contact contact) throws InvalidEntityException, DuplicatedEntityException {
-        if(validateContact(contact)) {
-            if(!didContactExist(contact)){
+        if (validateContact(contact)) {
+            if (!didContactExist(contact)) {
                 contact.setId(staticContactList.isEmpty() ? 1 : staticContactList.get(staticContactList.size() - 1).getId() + 1);
                 staticContactList.add(contact);
             } else {
@@ -118,19 +118,22 @@ public class ContactService {
     public static Contact modify(@NonNull Long id, @NonNull Contact contact) throws EntityNotFoundException, DuplicatedEntityException, InvalidEntityException {
         Contact contactToModify;
 
-        if(id != null && id > 0 && validateContact(contact)){
+        if (id != null && id > 0 && validateContact(contact)) {
             var contactRetrieved = getById(id);
             contactToModify = staticContactList.stream().filter(c -> c.equals(contactRetrieved)).findFirst().orElse(null);
-            if(contactToModify != null){
-                    contactToModify.setName(contact.getName());
-                    contactToModify.setCompany(contact.getCompany());
-                    contactToModify.setEmail(contact.getEmail());
-                    contactToModify.setBirthday(contact.getBirthday());
-                    contactToModify.setPersonalNumber(contact.getPersonalNumber());
-                    contactToModify.setWorkNumber(contact.getWorkNumber());
-                    contactToModify.setAddress(contact.getAddress());
+            if (contactToModify != null) {
+                if (!contactToModify.getEmail().toLowerCase().equals(contact.getEmail().trim().toLowerCase()) && didContactExist(contact)) {
+                    throw new DuplicatedEntityException("This contact already exists", ErrorCode.DUPLICATEDENTITY);
+                }
+                contactToModify.setName(contact.getName());
+                contactToModify.setCompany(contact.getCompany());
+                contactToModify.setEmail(contact.getEmail());
+                contactToModify.setBirthday(contact.getBirthday());
+                contactToModify.setPersonalNumber(contact.getPersonalNumber());
+                contactToModify.setWorkNumber(contact.getWorkNumber());
+                contactToModify.setAddress(contact.getAddress());
             } else {
-                throw new EntityNotFoundException("The contact with id " + id + " has not be found", ErrorCode.ENTITYNOTFOUND);
+                throw new EntityNotFoundException("The contact with id " + id + " has not been found", ErrorCode.ENTITYNOTFOUND);
             }
         } else {
             throw new InvalidEntityException("The contact you wanted to modify is invalid", ErrorCode.INVALIDENTITY);

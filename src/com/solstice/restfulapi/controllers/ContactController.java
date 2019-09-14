@@ -14,7 +14,7 @@ import java.util.List;
 public class ContactController extends BaseController {
 
     @GET
-    public List<Contact> Get(@BeanParam Contact contact){
+    public List<Contact> Get(@BeanParam Contact contact) {
         return ContactService.getAll(contact);
     }
 
@@ -38,7 +38,7 @@ public class ContactController extends BaseController {
 
     @DELETE
     @Path("{id : \\d+}")
-    public Contact Delete(@PathParam("id") @NonNull Long id, @BeanParam @NonNull Contact contact) throws EntityNotFoundException {
-        return ContactService.erase(id != null && id > 0 ? id : contact.getId());
+    public Contact Delete(@PathParam("id") @NonNull Long id) throws EntityNotFoundException {
+        return ContactService.erase(id);
     }
 }

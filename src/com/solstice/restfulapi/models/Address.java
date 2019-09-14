@@ -1,11 +1,14 @@
 package com.solstice.restfulapi.models;
 
+import javax.ws.rs.QueryParam;
 import java.util.Objects;
 
 public class Address {
     private Long block;
     private String street;
+    @QueryParam("city")
     private String city;
+    @QueryParam("state")
     private String state;
 
     public Address() {

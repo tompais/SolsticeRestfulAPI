@@ -1,6 +1,5 @@
 package com.solstice.restfulapi.models;
 
-import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 
 public abstract class BaseModel {
