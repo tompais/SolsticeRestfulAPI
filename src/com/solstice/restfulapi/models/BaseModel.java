@@ -1,13 +1,17 @@
 package com.solstice.restfulapi.models;
 
-public abstract class BaseModel {
-    private int id;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 
-    protected final int getId() {
+public abstract class BaseModel {
+    @QueryParam("id")
+    protected Long id;
+
+    public final Long getId() {
         return id;
     }
 
-    protected final void setId(int id) {
+    public final void setId(Long id) {
         this.id = id;
     }
 }
