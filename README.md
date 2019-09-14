@@ -16,3 +16,5 @@ I used JAX-RS (Java API for RESTful Web Services) to make this project.
 The tests were made using Jersey.
 
 You'll find a "postman" folder with samples that will show you how to run the services.
+
+Here is an example of an HttpGet Request URI: http://localhost:8080/SolsticeRestfulAPI-0.0.1-SNAPSHOT/api/contact?email=test@gmail.com
