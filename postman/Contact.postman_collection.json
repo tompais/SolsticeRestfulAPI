@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "91b838fb-70ef-49a4-ac98-74a30558863b",
+		"name": "Contact",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"tom\",\n    \"company\": \"casa\",\n    \"email\": \"tomas.j.pais@gmail.com\",\n    \"birthday\": \"1995-11-15\",\n    \"workNumber\": 44438353,\n    \"personalNumber\": 1132075813,\n    \"address\": {\n        \"block\": 509,\n        \"street\": \"Aquiles\",\n        \"city\": \"Buenos Aires\",\n        \"state\": \"Buenos Aires\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/SolsticeRestfulAPI-0.0.1-SNAPSHOT/api/contact",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"SolsticeRestfulAPI-0.0.1-SNAPSHOT",
+						"api",
+						"contact"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/SolsticeRestfulAPI-0.0.1-SNAPSHOT/api/contact?email=leandro.r.pais.98@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"SolsticeRestfulAPI-0.0.1-SNAPSHOT",
+						"api",
+						"contact"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "leandro.r.pais.98@gmail.com"
+						},
+						{
+							"key": "workNumber",
+							"value": "44438353",
+							"disabled": true
+						},
+						{
+							"key": "personalNumber",
+							"value": "1234",
+							"disabled": true
+						},
+						{
+							"key": "city",
+							"value": "Buenos Aires",
+							"disabled": true
+						},
+						{
+							"key": "state",
+							"value": "tomas.j.pais@gmail.com",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetById",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/SolsticeRestfulAPI-0.0.1-SNAPSHOT/api/contact/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"SolsticeRestfulAPI-0.0.1-SNAPSHOT",
+						"api",
+						"contact",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetByEmail",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/SolsticeRestfulAPI-0.0.1-SNAPSHOT/api/contact/tomas.j.pais@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"SolsticeRestfulAPI-0.0.1-SNAPSHOT",
+						"api",
+						"contact",
+						"tomas.j.pais@gmail.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/SolsticeRestfulAPI-0.0.1-SNAPSHOT/api/contact/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"SolsticeRestfulAPI-0.0.1-SNAPSHOT",
+						"api",
+						"contact",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteByEmail",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/SolsticeRestfulAPI-0.0.1-SNAPSHOT/api/contact/tomas.j.pais@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"SolsticeRestfulAPI-0.0.1-SNAPSHOT",
+						"api",
+						"contact",
+						"tomas.j.pais@gmail.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Lean\",\n    \"company\": \"solstice\",\n    \"email\": \"tomas.j.pais@gmail.com\",\n    \"birthday\": \"1995-11-15\",\n    \"workNumber\": 44438353,\n    \"personalNumber\": 1164690945,\n    \"address\": {\n    \t\"block\": 510,\n    \t\"street\": \"Aquiles\",\n    \t\"city\": \"Buenos Aires\",\n    \t\"state\": \"Buenos Aires\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/SolsticeRestfulAPI-0.0.1-SNAPSHOT/api/contact/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"SolsticeRestfulAPI-0.0.1-SNAPSHOT",
+						"api",
+						"contact",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
