@@ -3,6 +3,7 @@ package com.solstice.restfulapi.controllers;
 import com.solstice.restfulapi.exceptions.DuplicatedEntityException;
 import com.solstice.restfulapi.exceptions.EntityNotFoundException;
 import com.solstice.restfulapi.exceptions.InvalidEntityException;
+import com.solstice.restfulapi.helpers.HelpfulMethod;
 import com.solstice.restfulapi.models.Contact;
 import com.solstice.restfulapi.services.ContactService;
 import org.eclipse.jgit.annotations.NonNull;
@@ -29,6 +30,13 @@ public class ContactController extends BaseController {
         return ContactService.getById(id != null && id > 0 ? id : contact.getId());
     }
 
+    //Same concept as getById, but with the email
+    @GET
+    @Path("{email}")
+    public Contact GetByEmail(@PathParam("email") @NonNull String email, @BeanParam @NonNull Contact contact) throws EntityNotFoundException {
+        return ContactService.getByEmail(!HelpfulMethod.IsStringNullOrEmpty(email) ? email : contact.getEmail());
+    }
+
     @POST
     public Contact Post(@NonNull Contact contact) throws DuplicatedEntityException, InvalidEntityException {
         ContactService.create(contact);
@@ -48,5 +56,12 @@ public class ContactController extends BaseController {
     @Path("{id : \\d+}")
     public Contact Delete(@PathParam("id") @NonNull Long id) throws EntityNotFoundException {
         return ContactService.erase(id);
+    }
+
+    //I give you the opportunity to delete the record by id or by email
+    @DELETE
+    @Path("{email}")
+    public Contact DeleteByEmail(@PathParam("email") @NonNull String email) throws EntityNotFoundException {
+        return ContactService.erase(email);
     }
 }
