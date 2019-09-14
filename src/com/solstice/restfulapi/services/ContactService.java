@@ -19,8 +19,10 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ContactService {
+    //I keep the records in memory
     private static List<Contact> staticContactList = new ArrayList<>();
 
+    //Method that filters by email, workNumber, personalNumber, city and/or state
     private static List<Contact> filterList(List<Contact> contacts, Contact contact) {
         var filteredList = new ArrayList<>(contacts);
         if (contact != null) {
@@ -104,6 +106,7 @@ public class ContactService {
 
     public static void create(@NonNull Contact contact) throws InvalidEntityException, DuplicatedEntityException {
         if (validateContact(contact)) {
+            //You cannot insert duplicated records into the list
             if (!didContactExist(contact)) {
                 contact.setId(staticContactList.isEmpty() ? 1 : staticContactList.get(staticContactList.size() - 1).getId() + 1);
                 staticContactList.add(contact);
@@ -122,6 +125,8 @@ public class ContactService {
             var contactRetrieved = getById(id);
             contactToModify = staticContactList.stream().filter(c -> c.equals(contactRetrieved)).findFirst().orElse(null);
             if (contactToModify != null) {
+                //After the ID itself, to identify the record I use the email.
+                //If this property is going to be modified, then I have to check if someone else is using that email.
                 if (!contactToModify.getEmail().toLowerCase().equals(contact.getEmail().trim().toLowerCase()) && didContactExist(contact)) {
                     throw new DuplicatedEntityException("This contact already exists", ErrorCode.DUPLICATEDENTITY);
                 }

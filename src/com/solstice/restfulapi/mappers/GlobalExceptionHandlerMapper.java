@@ -6,6 +6,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
+//This Mapper will catch all the exceptions that could be thrown during the runtime
+//This is helpful, due to I can return a more "beautiful" and "comprehensible" text
+//In case an exception is thrown
 @Provider
 public class GlobalExceptionHandlerMapper implements ExceptionMapper<SolsticeException> {
 

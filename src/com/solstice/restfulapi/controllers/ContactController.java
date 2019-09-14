@@ -13,11 +13,16 @@ import java.util.List;
 @Path("/contact")
 public class ContactController extends BaseController {
 
+    //With this method you can either get a list of contacts by their email and/or phone,
+    //or you can also do this by city and/or state
+    //This HttpGet Method will filter everything as you want
     @GET
     public List<Contact> Get(@BeanParam Contact contact) {
         return ContactService.getAll(contact);
     }
 
+
+    //The parameter ID can be sent either by PathParam or the entity with QueryParam
     @GET
     @Path("{id : \\d+}")
     public Contact GetById(@PathParam("id") @NonNull Long id, @BeanParam @NonNull Contact contact) throws EntityNotFoundException {
@@ -30,6 +35,9 @@ public class ContactController extends BaseController {
         return contact;
     }
 
+
+    //I use the id to find the record.
+    //Then, I use the contact param to send the information that I want to modify from the specified record.
     @PUT
     @Path("{id : \\d+}")
     public Contact Put(@PathParam("id") @NonNull Long id, @NonNull Contact contact) throws EntityNotFoundException, InvalidEntityException, DuplicatedEntityException {

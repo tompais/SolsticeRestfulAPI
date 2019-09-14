@@ -1,5 +1,6 @@
 package com.solstice.restfulapi.enums;
 
+//I use this to have an enumeration of all the exceptions that I throw
 public enum ErrorCode {
 
     DUPLICATEDENTITY(1),
