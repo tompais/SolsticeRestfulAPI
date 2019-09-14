@@ -1,17 +1,41 @@
 package com.solstice.restfulapi.models;
 
+import javax.ws.rs.QueryParam;
 import java.awt.image.BufferedImage;
 import java.sql.Date;
+import java.util.Objects;
 
 public class Contact extends BaseModel {
+
+    @QueryParam("name")
     private String name;
+    @QueryParam("company")
     private String company;
     private BufferedImage profileImage;
+    @QueryParam("email")
     private String email;
+    @QueryParam("birthday")
     private Date birthday;
+    @QueryParam("workNumber")
     private Long workNumber;
+    @QueryParam("personalNumber")
     private Long personalNumber;
     private Address address;
+
+    public Contact() {
+    }
+
+    public Contact(Long id, String name, String company, BufferedImage profileImage, String email, Date birthday, Long workNumber, Long personalNumber, Address address) {
+        this.id = id;
+        this.name = name;
+        this.company = company;
+        this.profileImage = profileImage;
+        this.email = email;
+        this.birthday = birthday;
+        this.workNumber = workNumber;
+        this.personalNumber = personalNumber;
+        this.address = address;
+    }
 
     public String getName() {
         return name;
@@ -75,5 +99,25 @@ public class Contact extends BaseModel {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Contact)) return false;
+        Contact contact = (Contact) o;
+        return getName().equals(contact.getName()) &&
+                getCompany().equals(contact.getCompany()) &&
+                Objects.equals(getProfileImage(), contact.getProfileImage()) &&
+                getEmail().equals(contact.getEmail()) &&
+                getBirthday().equals(contact.getBirthday()) &&
+                getWorkNumber().equals(contact.getWorkNumber()) &&
+                getPersonalNumber().equals(contact.getPersonalNumber()) &&
+                getAddress().equals(contact.getAddress());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getCompany(), getProfileImage(), getEmail(), getBirthday(), getWorkNumber(), getPersonalNumber(), getAddress());
     }
 }
