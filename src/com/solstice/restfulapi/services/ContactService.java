@@ -34,15 +34,15 @@ public class ContactService {
             var filterCity = address != null ? address.getCity() : null;
             var filterState = address != null ? address.getState() : null;
 
-            if (validateEmail(filterEmail)) {
+            if (!HelpfulMethod.IsStringNullOrEmpty(filterEmail)) {
                 filteredList = (ArrayList<Contact>) filteredList.stream().filter(c -> c.getEmail().trim().toLowerCase().equals(filterEmail.trim().toLowerCase())).collect(Collectors.toList());
             }
 
-            if (validateNumber(filterPersonalNumber)) {
+            if (filterPersonalNumber != null) {
                 filteredList = (ArrayList<Contact>) filteredList.stream().filter(c -> c.getPersonalNumber().equals(filterPersonalNumber)).collect(Collectors.toList());
             }
 
-            if (validateNumber(filterWorkNumber)) {
+            if (filterWorkNumber != null) {
                 filteredList = (ArrayList<Contact>) filteredList.stream().filter(c -> c.getWorkNumber().equals(filterWorkNumber)).collect(Collectors.toList());
             }
 
@@ -91,6 +91,17 @@ public class ContactService {
             contact = staticContactList.stream().filter(c -> c.getId().equals(id)).findFirst().orElse(null);
             if (contact == null) {
                 throw new EntityNotFoundException("The contact with id " + id + " has not been found", ErrorCode.ENTITYNOTFOUND);
+            }
+        }
+        return contact;
+    }
+
+    public static Contact getByEmail(@NonNull String email) throws EntityNotFoundException {
+        Contact contact = null;
+        if (!HelpfulMethod.IsStringNullOrEmpty(email)) {
+            contact = staticContactList.stream().filter(c -> c.getEmail().trim().toLowerCase().equals(email.trim().toLowerCase())).findFirst().orElse(null);
+            if (contact == null) {
+                throw new EntityNotFoundException("The contact with the email " + email.trim() + " has not been found", ErrorCode.ENTITYNOTFOUND);
             }
         }
         return contact;
@@ -149,6 +160,12 @@ public class ContactService {
 
     public static Contact erase(@NonNull Long id) throws EntityNotFoundException {
         var contact = getById(id);
+        staticContactList.remove(contact);
+        return contact;
+    }
+
+    public static Contact erase(@NonNull String email) throws EntityNotFoundException {
+        var contact = getByEmail(email);
         staticContactList.remove(contact);
         return contact;
     }
